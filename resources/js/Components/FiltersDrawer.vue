@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, defineProps, defineEmits, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { Drawer } from 'flowbite'
 import Filters from '@/Components/Filters.vue'
 import SecondaryButton from '@/Components/SecondaryButton.vue'

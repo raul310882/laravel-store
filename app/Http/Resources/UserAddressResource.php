@@ -11,6 +11,7 @@ class UserAddressResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
+        //dd($this);
         return [
             'id' => $this->id,
             'is_main' => $this->is_main,

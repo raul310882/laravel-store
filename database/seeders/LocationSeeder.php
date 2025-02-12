@@ -14,7 +14,12 @@ class LocationSeeder extends Seeder
     /** @throws FileCannotBeAdded|FileIsTooBig|FileDoesNotExist */
     public function run(): void
     {
-        $countries = Http::acceptJson()->withHeader('X-CSCAPI-KEY', config('services.csc.key'))->get(config('services.csc.url'))->json();
+        $countries = Http::acceptJson()
+            ->withHeader('X-CSCAPI-KEY', config('services.csc.key'))
+            ->get(config('services.csc.url'))
+            ->json();
+
+        //dd($countries); // Inspeccionar respuesta antes de continuar
 
         collect($countries)->each(
             function (array $country) {
@@ -22,6 +27,8 @@ class LocationSeeder extends Seeder
                     ->withHeader('X-CSCAPI-KEY', config('services.csc.key'))
                     ->get(config('services.csc.url') . $country['iso2'])
                     ->json();
+
+                //dd($countryDetails); // Inspeccionar respuesta antes de continuar
 
                 $createdCountry = Country::create([
                     'name' => $countryDetails['name'],

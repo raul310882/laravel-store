@@ -25,6 +25,8 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('brandford22'),
             ]);
 
-        $user->addAvatarMedia(config('services.multiavatar.url') . $user->getFilamentName() . '.svg?apikey=' . config('services.multiavatar.key'));
+        $user->addAvatarMedia(
+            'https://api.dicebear.com/8.x/identicon/svg?seed=' . urlencode($user->name)
+        );
     }
 }

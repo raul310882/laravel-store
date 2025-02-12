@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue'
 import Slider from '@vueform/slider'
 import Filter from '@/Components/Filter.vue'
 import SecondaryButton from '@/Components/SecondaryButton.vue'

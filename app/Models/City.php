@@ -21,6 +21,13 @@ class City extends Model
 
     public function country(): HasOneThrough
     {
-        return $this->hasOneThrough(Country::class, State::class, 'id', 'id', 'state_id', 'country_id');
+        return $this->hasOneThrough(
+            Country::class,    // Modelo final
+            State::class,     // Modelo intermedio
+            'id',             // Clave foránea en el modelo State (hacia City)
+            'id',             // Clave foránea en Country (hacia State) 
+            'state_id',       // Clave local en City
+            'country_id'      // Clave local en State
+        );
     }
 }

@@ -7,6 +7,7 @@ import '@splidejs/vue-splide/css/sea-green'
 import { initTooltips } from 'flowbite'
 import { useFormat } from '@/composables/format'
 import PrimaryButton from '@/Components/PrimaryButton.vue'
+import { Splide, SplideSlide } from '@splidejs/vue-splide'
 
 const props = defineProps({
     good: Object
