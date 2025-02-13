@@ -34,20 +34,32 @@ const form = useForm({
 const isCardExists = computed(() => !!props.card)
 
 const onCardModal = async () => {
-    cardModal.value = true
-    stripe.value = await loadStripe(import.meta.env.VITE_STRIPE_KEY)
-    const elements = stripe.value.elements()
-    cardElement.value = elements.create('card', {
-        hidePostalCode: true,
-        classes: {
-            base: 'p-3 bg-gray-100 rounded border border-gray-300 outline-none transition-colors duration-200 ease-in-out'
+    try {
+        if (!import.meta.env.VITE_STRIPE_KEY) {
+            throw new Error('Stripe key no configurada en variables de entorno');
         }
-    })
-    cardElement.value.mount('#card-element')
-    cardElement.value.on('change', (event) => (completed.value = event.complete))
+        
+        stripe.value = await loadStripe(import.meta.env.VITE_STRIPE_KEY)
+        const elements = stripe.value.elements()
+        cardElement.value = elements.create('card', {
+            hidePostalCode: true,
+            classes: {
+                base: 'p-3 bg-gray-100 rounded border border-gray-300 outline-none transition-colors duration-200 ease-in-out'
+            }
+        })
+        cardElement.value.mount('#card-element')
+        cardElement.value.on('change', (event) => (completed.value = event.complete))
+    } catch (error) {
+        console.error('Error de inicialización Stripe:', error)
+        alert('Error de configuración de pagos: ' + error.message)
+    }
 }
 
 const submit = async () => {
+    if (!stripe.value || !cardElement.value) {
+        alert('El sistema de pagos no se inicializó correctamente');
+        return;
+    }
     paymentProcessing.value = true
     await stripe.value
         .createPaymentMethod({

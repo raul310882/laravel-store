@@ -10,8 +10,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class UserAddressResource extends JsonResource
 {
     public function toArray(Request $request): array
-    {
-        //dd($this);
+    {   
+        //dd($request->user()->addresses);
         return [
             'id' => $this->id,
             'is_main' => $this->is_main,
@@ -29,14 +29,16 @@ class UserAddressResource extends JsonResource
             ],
             'state' => [
                 'id' => $this->state->id,
-                'uuid' => $this->state->uuid,
+                //'uuid' => $this->state->uuid,
                 'name' => $this->state->name,
-            ],
+            ],   
+            //dd($this->city->id),    
             'city' => [
                 'id' => $this->city->id,
-                'uuid' => $this->city->uuid,
+                //'uuid' => $this->city->uuid,
                 'name' => $this->city->name,
             ],
         ];
+        
     }
 }

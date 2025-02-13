@@ -26,7 +26,7 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): Response
     {
-        dd($request->user());
+        //dd($request->user());
         return Inertia::render('Profile/PersonalInformation', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
@@ -34,6 +34,7 @@ class ProfileController extends Controller
                 'orders' => $request->user()->orders()->count(),
                 'reviews' => $request->user()->reviews()->count(),
             ],
+            //dd (UserAddressResource::collection($request->user()->addresses)),
             'addresses' => UserAddressResource::collection($request->user()->addresses),
             'countries' => CountryResource::collection(Cache::rememberForever('countries', fn () => Country::all())),
         ]);
