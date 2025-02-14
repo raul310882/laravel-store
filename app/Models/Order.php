@@ -25,6 +25,7 @@ class Order extends Model
         'total_cost',
         'status',
         'status_history',
+        'stripe_session_id',
     ];
 
     protected $casts = [

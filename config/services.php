@@ -51,4 +51,10 @@ return [
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
         'redirect' => '/social/google/callback',
     ],
+    'stripe' => [
+    'key' => env('STRIPE_KEY'),
+    'secret' => env('STRIPE_SECRET'),
+    'webhook' => env('STRIPE_WEBHOOK_SECRET'),
+    'currency' => env('STRIPE_CURRENCY', 'usd')
+]
 ];

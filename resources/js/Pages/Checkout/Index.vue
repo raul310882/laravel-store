@@ -76,7 +76,16 @@ const confirmOrder = () => {
         goods_cost: props.cart.total,
         delivery_cost: deliveryCost.value,
         total_cost: totalCostPromoCode.value
-    })).post(route('checkout.store'))
+    })).post(route('checkout.store'), {
+        onSuccess: (response) => {
+            if (response.data.redirect_url) {
+                window.location.href = response.data.redirect_url;
+            }
+        },
+        onError: (errors) => {
+            console.error('Checkout error:', errors);
+        }
+    });
 }
 </script>
 

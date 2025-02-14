@@ -27,8 +27,8 @@ const form = useForm<{
     city_id: number | null
     street: string
     house: string
-    flat: string | null
-    postal_code: string | null
+    flat: string
+    postal_code: string
 }>({
     country_id: null,
     state_id: null,
@@ -112,8 +112,8 @@ const onEditAddress = (address: Address) => {
     form.id = address.id
     form.street = address.street
     form.house = address.house
-    form.flat = address.flat
-    form.postal_code = address.postal_code
+    form.flat = address.flat ?? ''
+    form.postal_code = address.postal_code ?? ''
     addressModal.value = true
     addressUpdateModal.value = true
 }
